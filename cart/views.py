@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import product, transaction, order
+from .models import product, transaction, order, User
 from django.template import loader
 
 from .forms import PaymentInfo
@@ -119,9 +119,22 @@ def completepayment(request):
 
 def checklogin(request):
     if(request.method == 'POST'):
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        print(username, password)
+        input_username = request.POST.get('uname')
+        input_password = request.POST.get('psw')
+        try:
+            user = User.objects.get(username=input_username)
+        except User.DoesNotExist:
+            user = None
+        if user is None:
+            new_user = User()
+            new_user.username = input_username
+            new_user.password = input_password
+            new_user.save()
+            context = {"message": "Sign Up Successful"}
+        else:
+            context = {"message": "Begone THOT"}
+    template = loader.get_template('login.html')
+    return HttpResponse(template.render(context, request))
 
 
 def render_login(request):
