@@ -21,6 +21,7 @@
     <div class="nav-wrapper container"><a id="logo-container" href="http://127.0.0.1:8000/cart/" class="brand-logo">
       {% load static %}
       <ul class="right hide-on-med-and-down">
+        <li><a href="http://127.0.0.1:8000/">Home</a></li>
         <li><a href="http://127.0.0.1:8000/cart/">Cart</a></li><li><i class="material-icons">shopping_cart</i></li>
         <li><a href="#">Help</a></li>
         <li><input type="text" placeholder="Search.." name="search"></li><li><i class="material-icons">search</i></li>
@@ -41,8 +42,18 @@
         {% if products %}
             <ul>
             {% for product in products %}
-                <h5 class="center"><li><a href="{{ product.product_ID }}/POST">Product: {{product.product_name }} </a>| Price: Rs.{{product.price}}</li></h5>
-                <img src="{{ product.imagesrc }}" width="240" height= "240" />
+                <!-- <h5 class="center"><li><a href="{{ product.product_ID }}/POST">Product: {{product.product_name }} </a>| Price: Rs.{{product.price}}</li></h5>
+                <img src="{{ product.imagesrc }}" width="240" height= "240" /> -->
+                <div class="card" style="width: 21rem;">
+                  <img src="{{ product.imagesrc }}" class="card-img-top" alt="product" width="240" height="240" style="margin-left: 40px; margin-top: 10px;">
+                  <div class="card-body">
+                    <h6 class="card-title" style="text-align:center;">{{ product.product_name }}</h6>
+                    <p class="card-text" style="text-align:center;">{{ product.product_description }}</p>
+                    <button class="btn btn-primary" style="margin-bottom:10px; margin-left: 85px;"><a href="{{ product.product_ID }}/POST" style="color:white;">Add to Cart</a></button>
+                    <br>
+                      <button class="btn btn-primary" style="margin-bottom: 10px; margin-left: 70px;"><a href="#" style="color:white;">Add to Wishlist</a></button>
+                  </div>
+                </div>
             {% endfor %}
             </ul>
         {% else %}
