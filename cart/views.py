@@ -26,7 +26,7 @@ def index(request):
 
 def equipment(request):
     products = product.objects.all().filter(category="Equipment")
-    template = loader.get_template('cart/equipment.html')
+    template = loader.get_template('index.html')
     context = {
         'products': products,
     }
@@ -35,7 +35,7 @@ def equipment(request):
 
 def shoes(request):
     products = product.objects.all().filter(category="Shoes")
-    template = loader.get_template('cart/templates/shoes.html')
+    template = loader.get_template('index.html')
     context = {
         'products': products,
     }
@@ -44,7 +44,7 @@ def shoes(request):
 
 def clothing(request):
     products = product.objects.all().filter(category="Clothing")
-    template = loader.get_template('ecommerce/fashion.html')
+    template = loader.get_template('index.html')
     context = {
         'products': products,
     }
@@ -143,15 +143,29 @@ def render_login(request):
 
 def search(request):
     if(request.method == 'POST'):
-        search = request.POST.get('search')
-        status = product.objects.all().filter(product_name=search)
+        input_search = request.POST.get('search')
+        status = product.objects.all().filter(product_name=input_search)
         context = {
-            "product": product
+            "product": status
         }
-        template = loader.get_template('cart/templates/search.html')
+        template = loader.get_template('search.html')
         return template.render(context, request)
     else:
         return render(request, "search.html", {})
+def wishlist(request):
+    products = product.objects.all().filter(cart="1")
+    template = loader.get_template('wishlist.html')
+    context = {
+        'products': products,
+    }
+    return HttpResponse(template.render(context, request))
+def landing(request):
+    products = product.objects.all()
+    template = loader.get_template('landing.html')
+    context = {
+        'products': products,
+    }
+    return HttpResponse(template.render(context, request))
 
 # Create your views here.
 

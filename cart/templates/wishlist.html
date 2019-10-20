@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-{% extends 'base.html' %}
 {% block head %}
 <head>
 {% load static %}
@@ -11,27 +10,20 @@
 
   <!-- CSS  -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="{% static 'static/css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="{% static 'static/css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{% static 'css/materialize.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="{% static 'css/style.css' %}" type="text/css" rel="stylesheet" media="screen,projection"/>
 </head>
 {% endblock %}
 {% block body %}
 <body>
   {% load static %}
   <nav class="indigo lighten-3" role="navigation">
-    <div class="nav-wrapper container"><a id="logo-container" href="http://localhost:8000/ecommerce/" class="brand-logo"></a>
+    <div class="nav-wrapper container"><a id="logo-container" href="http://127.0.0.1:8000/cart/" class="brand-logo">
       {% load static %}
       <ul class="right hide-on-med-and-down">
-        <li><a href="http://localhost:8000/ecommerce/cart">Cart</a></li><li><i class="material-icons">shopping_cart</i></li>
+        <li><a href="http://127.0.0.1:8000/">Home</a></li><li><i class="material-icons">shopping_cart</i></li>
         <li><a href="#">Help</a></li>
-         <li>
-          <form method="POST" action="/search">
-            <input type="text" placeholder="Search.." name="search"></li>
-            <li>
-              {% csrf_token %}
-              <button type="submit"><i class="material-icons">search</i></button>
-            </li>
-          </form>
+        <li><input type="text" placeholder="Search.." name="search"></li><li><i class="material-icons">search</i></li>
       </ul>
 
       <ul id="nav-mobile" class="sidenav">
@@ -43,6 +35,7 @@
   <div class="section no-pad-bot" id="index-banner">
     <div class="container">
       <br><br>
+      <h2 class="header center black-text light">| Your Wishlist |</h2>
     <!--  <div class="row center">
         <h5 class="header col s12 light">Biggest E-Commerce Shopping Website</h5>
       </div>
@@ -55,22 +48,43 @@
 
   <div class="container">
     <div class="section">
-
       <!--   Icon Section   -->
       <div class="row">
-      {% if product %}
+        {% if products %}
             <ul>
-            {% for each_product in product %}
-            <div class="col s12 m4">
-                <h4 class="center"><li><a href="/cart/{{ product.product_ID }}/">{{ each_product.product_name }}</a></li></h4>
+            {% for product in products %}
+              <div class="card" style="width: 21rem;">
+                <div style="margin-left: 55px;">
+                <img src="{{ product.imagesrc }}" class="card-img-top" alt="product" width="200" height="200">
                 </div>
+                <div class="card-body">
+                  <h6 class="card-title" style="text-align:center;">{{ product.product_name }}</h6>
+                  <p class="card-text" style="text-align:center;"> Quantity: {{ product.quantity}} | Price: Rs. {{product.price}}</p>
+                  <button class="btn btn-primary" style="margin-bottom:10px; margin-left: 85px;"><a href="{{ product.product_ID }}/POST" style="color:white;">Add to Cart</a></button>
+                </div>
+            </div>
             {% endfor %}
             </ul>
-
         {% else %}
             <p>No products are available.</p>
         {% endif %}
+<form action='/checkout' method="POST" id="form1">
+{% csrf_token %}
+<br>
+<div class="container">
+  <div class="center">
+  <button
+    type="submit"
+    class="btn attendBtn"
+    name="check out">Check Out
+  </button>
+</div>
+</div>
+ </form>
       </div>
+
+      </div>
+
   <!--      <div class="col s12 m4">
           <div class="icon-block">
             <h2 class="center pink-text"><i class="material-icons">store</i></h2>
@@ -98,21 +112,24 @@
       <div class="row">
         <div class="col l6 s12">
           <h5 class="white-text">Support</h5>
-          <p class="grey-text text-lighten-4">Write to us on customercare@gmail.com</p>
+          <p class="grey-text text-lighten-4">Write to us at customercare@gmail.com</p>
 
 
         </div>
       </div>
     </div>
     <div class="footer-copyright">
+      <div class="container">
+
+      </div>
     </div>
   </footer>
 
 
   <!--  Scripts-->
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="js/materialize.js"></script>
-  <script src="js/init.js"></script>
+  <!-- <script src="js/materialize.js"></script>
+  <script src="js/init.js"></script> -->
 
   </body>
   {% endblock %}

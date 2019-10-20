@@ -59,7 +59,7 @@
                 </div>
                 <div class="card-body">
                   <h6 class="card-title" style="text-align:center;">{{ product.product_name }}</h6>
-                  <p class="card-text" style="text-align:center;"> Quantity: {{ product.quantity}} | Price: Rs. {% widthratio product.price 1 product.quantity %}</p>
+                  <p class="card-text" style="text-align:center;"> Quantity: {{ product.quantity}} | Total Price: Rs. {% widthratio product.price 1 product.quantity %}</p>
                   <button class="btn btn-primary" style="margin-bottom:10px; margin-left: 85px;"><a href="{{ product.product_ID }}/POST" style="color:white;">Remove from Cart</a></button>
                 </div>
             </div>
@@ -68,7 +68,7 @@
         {% else %}
             <p>No products are available.</p>
         {% endif %}
-<form action='checkout/' method="POST" id="form1">
+<form action='/checkout' method="POST" id="form1">
 {% csrf_token %}
 <br>
 <div class="container">

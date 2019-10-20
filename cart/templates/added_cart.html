@@ -25,7 +25,14 @@
         <li><a href="#">Profile</a></li>
         <li><a href="http://localhost:8000/ecommerce/cart">Cart</a></li><li><i class="material-icons">shopping_cart</i></li>
         <li><a href="#">Help</a></li>
-        <li><input type="text" placeholder="Search.." name="search"></li><li><i class="material-icons">search</i></li>
+        <li>
+          <form method="POST" action="/search">
+            <input type="text" placeholder="Search.." name="search"></li>
+            <li>
+              {% csrf_token %}
+              <button type="submit"><i class="material-icons">search</i></button>
+            </li>
+          </form>
       </ul>
 
       <ul id="nav-mobile" class="sidenav">
