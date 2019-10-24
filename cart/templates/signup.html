@@ -1,3 +1,4 @@
+<!-- Button to open the modal login form -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,74 +47,35 @@
       <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
     </div>
   </nav>
+<div class="container-fluid" style="margin:40px;">
+  <form method="POST" class="modal-content animate" action="/checksignup">
 
-<br><br><br><br>
-  <div class="container">
-    <div class="section">
+    <div class="container">
+      <p style="color:red;">{{ message }}</p>
+      <label for="uname"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="uname" required>
+      {% csrf_token %}
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw" required>
 
-      <!--   Icon Section   -->
-      <div class="row">
-
-Congratulations! Product {{products.prodcut_name }} has been added to the cart.
-
-<a href = "http://localhost:8000/"> Continue Shopping! </a>
-
-
-  <!--      <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center pink-text"><i class="material-icons">store</i></h2>
-            <a href="#"><h5 class="center">Product#2</h5></a>
-
-            <p class="light"></p>
-          </div>
-        </div>
-
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center pink-text"><i class="material-icons">fastfood</i></h2>
-            <a href="#"><h5 class="center">Product#3</h5></a>
-            <p class="light"></p>
-          </div>
-        </div> -->
-      </div>
+      <button type="submit" style="margin-top:20px;" class="btn btn-primary">Sign Up</button>
 
     </div>
-    <br><br>
-  <br><br>
-  <br><br>
-  <footer class="page-footer indigo lighten-3">
+  </form>
+</div>
+
+<footer class="page-footer indigo lighten-3">
     <div class="container">
       <div class="row">
         <div class="col l6 s12">
           <h5 class="white-text">Support</h5>
-          <p class="grey-text text-lighten-4">Write to us at customercare@gmail.com</p>
+          <p class="grey-text text-lighten-4">Write to us on customercare@gmail.com</p>
 
 
-        </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Settings</h5>
-          <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
-          </ul>
-        </div>
-        <div class="col l3 s12">
-          <h5 class="white-text">Connect</h5>
-          <ul>
-            <li><a class="white-text" href="#!">Link 1</a></li>
-            <li><a class="white-text" href="#!">Link 2</a></li>
-            <li><a class="white-text" href="#!">Link 3</a></li>
-            <li><a class="white-text" href="#!">Link 4</a></li>
-          </ul>
         </div>
       </div>
     </div>
     <div class="footer-copyright">
-      <div class="container">
-      Made by <a class="orange-text text-lighten-3" href="http://materializecss.com">Materialize</a>
-      </div>
     </div>
   </footer>
 

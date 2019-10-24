@@ -117,7 +117,7 @@ def completepayment(request):
     return HttpResponse(template.render({}, request))
 
 
-def checklogin(request):
+def check_signup(request):
     if(request.method == 'POST'):
         input_username = request.POST.get('uname')
         input_password = request.POST.get('psw')
@@ -132,13 +132,13 @@ def checklogin(request):
             new_user.save()
             context = {"message": "Sign Up Successful"}
         else:
-            context = {"message": "Begone THOT"}
-    template = loader.get_template('login.html')
+            context = {"message": "Username Name Taken"}
+    template = loader.get_template('signup.html')
     return HttpResponse(template.render(context, request))
 
 
-def render_login(request):
-    return render(request, "login.html", {})
+def render_signup(request):
+    return render(request, "signup.html", {})
 
 
 def search(request):
@@ -149,9 +149,11 @@ def search(request):
             "product": status
         }
         template = loader.get_template('search.html')
-        return template.render(context, request)
+        return HttpResponse(template.render(context, request))
     else:
         return render(request, "search.html", {})
+
+
 def wishlist(request):
     products = product.objects.all().filter(cart="1")
     template = loader.get_template('wishlist.html')
@@ -159,6 +161,8 @@ def wishlist(request):
         'products': products,
     }
     return HttpResponse(template.render(context, request))
+
+
 def landing(request):
     products = product.objects.all()
     template = loader.get_template('landing.html')
